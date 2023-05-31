@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print Name and Age</title>
+  <style>
+    body {
+      background-image: url(back.jpg);
+    }
+
+    h1 {
+      font-size: 80px;
+      color: rgb(54, 197, 149);
+    }
+
+    ul {
+      font-size: large;
+      font-weight: bold;
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>List of persons</h1>
+  <ul id="ul">
+
+  </ul>
+  <script>
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        const personList = document.getElementById('ul');
+        data.forEach(person => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `Name: ${person.name}, Age: ${person.age}`;
+          personList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      }); 
+  </script>
+</body>
+
+</html>
